@@ -1,64 +1,70 @@
+/* eslint-disable no-unreachable */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-constant-condition */
 // import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { NavBar } from "./components/NavBar";
-import { Banner } from "./components/Banner";
-import { Skills } from "./components/Skills";
-import { Projects } from "./components/Projects";
-import { Contact } from "./components/Contact";
-import { Footer } from "./components/Footer";
-import Theme from './styles/theme';
-import { useRef, useEffect, useState } from "react";
-import NET from 'vanta/dist/vanta.net.min';
-import * as THREE from "three";
+import MainApp from './components/MainApp.jsx';
+import { useEffect, useState } from "react";
+import { DNA } from 'react-loader-spinner'
+
 
 function App() {
-  const cursor = useRef(null)
-  const changePosition = (e) => {
-    cursor.current.style.top = `${e.clientY}px`;
-    cursor.current.style.left = `${e.clientX}px`;
-  }
 
-  const [vantaEffect, setVantaEffect] = useState(null);
-  const myRef = useRef(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    if (!vantaEffect) {
-      setVantaEffect(
-        NET({
-          el: myRef.current,
-          THREE: THREE,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          scale: 0.8,
-          scaleMobile: 1.00,
-          color: 0x380740,
-          backgroundColor: 0x0
-        })
-      );
-    }
-    return () => {
-      if (myRef.current && myRef.current.vanta) {
-        myRef.current.vanta.destroy();
-      }
-    };
+    // Set a timeout to switch from loading to the next component after 2 seconds
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    // Cleanup the timeout on component unmount to avoid memory leaks
+    return () => clearTimeout(timeoutId);
   }, []);
 
-  return (
-    <div className="App " ref={myRef} style={{ minHeight: "100vh", minWidth: "100vw" }} onMouseMove={changePosition}>
-      <div className="cursor-style" ref={cursor} ></div>
-      <Theme>
-        <NavBar />
-        <Banner />
-        <Skills />
-        <Projects />
-        <Contact />
-        <Footer />
-      </Theme>
+  if (loading) {
+    return <div className='d-flex justify-content-center items-center align-middle' style={{ height: "100vh", alignItems: "center" }}>
+      <div className='d-flex'>
+        <DNA
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+        />
+        <DNA
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+        />
+        <DNA
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+        />
+        <DNA
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+        />
+      </div>
     </div>
-  );
+  } else {
+    return <MainApp />
+  }
 }
+
+
 
 export default App;
