@@ -26,10 +26,15 @@ export const NavBar = () => {
     window.open(whatsappLink, '_blank');
   };
 
+  const [isNavOpen, setNavOpen] = useState(true);
 
+  const handleNavToggle = () => {
+    setNavOpen(!isNavOpen);
+    console.log(isNavOpen)
+  };
   return (
     <Router>
-      <Navbar expand="md" className={"scrolled"}>
+      <Navbar expand="md" className={"scrolled"} show={isNavOpen}>
         <Container className="justify-content-end">
           <motion.span
             initial={{ y: 30, opacity: 0 }}
@@ -40,11 +45,11 @@ export const NavBar = () => {
             {/* <Navbar.Brand href="/"> */}
             {/* <img src={logo} alt="Logo" /> */}
             {/* </Navbar.Brand> */}
-            <Navbar.Toggle aria-controls="basic-navbar-nav">
-              <span className="navbar-toggler-icon"></span>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleNavToggle}>
+              <span className="navbar-toggler-icon p-2"></span>
             </Navbar.Toggle>
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="ms-auto">
+            <Navbar.Collapse id="basic-navbar-nav" show={isNavOpen} >
+              <Nav className="ms-auto " show={isNavOpen}>
                 <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
                 <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
                 <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => { onUpdateActiveLink('projects'); localStorage.setItem("active", "first") }}>Projects</Nav.Link>
@@ -57,7 +62,7 @@ export const NavBar = () => {
                     <img src={navIcon3} alt="" />
                   </a>
                 </div>
-                <HashLink to='#connect'>
+                <HashLink to='#connect' onClick={handleNavToggle}>
                   <motion.button className="vvd rounded" whileTap={{ scale: 0.85 }}>
                     <span>Let’s Connect</span>
                   </motion.button>

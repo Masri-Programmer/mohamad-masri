@@ -14,6 +14,7 @@ import { SectionTitle } from "../styles/GlobalComponents"
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect } from "react";
 import AOS from 'aos';
+import { useMediaQuery } from 'react-responsive'
 import 'aos/dist/aos.css';
 export const Skills = () => {
   const count = useMotionValue(-10);
@@ -53,6 +54,7 @@ export const Skills = () => {
 
   //   return animation.stop;
   // }, []);
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
 
   const responsive = {
     superLargeDesktop: {
@@ -62,15 +64,15 @@ export const Skills = () => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3
+      items: 4
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2
+      items: 3
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1
+      items: 3
     }
   };
 
@@ -91,7 +93,10 @@ export const Skills = () => {
                 </div>
               </motion.span>
               <p>I have accumulated three years of relevant experience, including a one-year work placement</p>
-              <Carousel autoPlay="true" responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
+              <Carousel
+                arrows={isTabletOrMobile ? false : true}
+                autoPlay="true" swipeable={true}
+                draggable={true} responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider" style={{ textSize: "10px" }}>
                 <div className="item">
                   <img style={{ maxHeight: "111px", objectFit: "contain" }} src={meter1} alt="Image" />
                   <h5>React. Js</h5>

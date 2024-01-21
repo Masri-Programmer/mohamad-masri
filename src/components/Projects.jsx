@@ -31,6 +31,7 @@ import Time from "./Time"
 import { CarouselButton, CarouselButtonDot, CarouselButtons, CarouselContainer, } from './TimeLineStyles';
 import { Section, SectionDivider, } from '../styles/GlobalComponents';
 
+import { useMediaQuery } from 'react-responsive'
 const projects = [
   {
     title: "Ultra Store",
@@ -135,6 +136,7 @@ export const Projects = () => {
     });
   }, [active]);
 
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
   return (
     <section className="project" id="projects">
       <Container>
@@ -209,8 +211,8 @@ export const Projects = () => {
                       </Section>
                     </Tab.Pane>
                     <Tab.Pane eventKey="third" >
-                      {/* <p>Bachelor in Computer Science and Frontend developer at Brainkets. Passionate for coding and growing , I have been able to apply my education and skills to create visually appealing and user-friendly web applications. Constantly learning and staying up-to-date with the latest technologies and best practices to ensure that my work is of the highest quality. My passion for coding and my drive to always improve, makes me a valuable asset to any team. I am excited to continue my professional journey and take on new challenges in the field of Frontend Development.</p> */}
-                      <Magnifier src={text} width={"100%"} />
+                      {isTabletOrMobile ? <p style={{ backgroundColor: "black" }}>Bachelor in Computer Science and Frontend developer at Brainkets. Passionate for coding and growing , I have been able to apply my education and skills to create visually appealing and user-friendly web applications. Constantly learning and staying up-to-date with the latest technologies and best practices to ensure that my work is of the highest quality. My passion for coding and my drive to always improve, makes me a valuable asset to any team. I am excited to continue my professional journey and take on new challenges in the field of Frontend Development.</p> : <Magnifier src={text} width={"100%"} />}
+
                     </Tab.Pane>
                   </Tab.Content>
                 </Tab.Container>

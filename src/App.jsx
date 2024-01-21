@@ -7,17 +7,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MainApp from './components/MainApp.jsx';
 import { useEffect, useState } from "react";
 import { DNA } from 'react-loader-spinner'
-
+import { useMediaQuery } from 'react-responsive'
 
 function App() {
-
   const [loading, setLoading] = useState(true);
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
 
   useEffect(() => {
     // Set a timeout to switch from loading to the next component after 2 seconds
     const timeoutId = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
 
     // Cleanup the timeout on component unmount to avoid memory leaks
     return () => clearTimeout(timeoutId);
@@ -61,7 +61,7 @@ function App() {
       </div>
     </div>
   } else {
-    return <MainApp />
+    return <MainApp isTabletOrMobile={isTabletOrMobile} />
   }
 }
 

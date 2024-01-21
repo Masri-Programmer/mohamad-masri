@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { NavBar } from "./NavBar";
@@ -11,7 +12,7 @@ import { useRef, useEffect, useState } from "react";
 import NET from 'vanta/dist/vanta.net.min';
 import * as THREE from "three";
 
-const MainApp = () => {
+const MainApp = ({ isTabletOrMobile }) => {
     const cursor = useRef(null)
     const changePosition = (e) => {
         cursor.current.style.top = `${e.clientY}px`;
@@ -21,7 +22,7 @@ const MainApp = () => {
     const [vantaEffect, setVantaEffect] = useState(null);
     const myRef = useRef(null);
     useEffect(() => {
-        if (!vantaEffect) {
+        if (!vantaEffect && !isTabletOrMobile) {
             setVantaEffect(
                 NET({
                     el: myRef.current,
@@ -43,7 +44,7 @@ const MainApp = () => {
                 myRef.current.vanta.destroy();
             }
         };
-    }, []);
+    }, [isTabletOrMobile, vantaEffect]);
 
 
     return (
