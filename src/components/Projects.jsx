@@ -30,6 +30,7 @@ import Magnifier from "react-magnifier";
 import Time from "./Time"
 import { CarouselButton, CarouselButtonDot, CarouselButtons, CarouselContainer, } from './TimeLineStyles';
 import { Section, SectionDivider, } from '../styles/GlobalComponents';
+
 const projects = [
   {
     title: "Ultra Store",
@@ -123,7 +124,7 @@ const TimeLineData = [
   { year: 2022, text: 'Landed a full-stack job at Brainkets, where I am using my skills and expertise in web development to create innovative and modern software solutions for clients', },
   { year: 2023, text: 'Graduated with Bachelor in Computer Science and completed over 5 courses in Full Stack development and preparing for a new job in Germany', },
 ];
-let isActive = localStorage.getItem("active");
+let isActive = localStorage.getItem("active") ? localStorage.getItem("active") : "first";
 export const Projects = () => {
   const [active, setActive] = useState(isActive);
 
