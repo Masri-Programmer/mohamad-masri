@@ -35,7 +35,7 @@ export const Footer = () => {
           <Col size={12} sm={6}>
             {/* <img src={logo} alt="Logo" /> */}
             <div className="email-container">
-              <a href="mailto:masri_moohamad@protonmail.com" target="_blank">masri_moohamad@protonmail.com</a>
+              <a href="mailto:masri_moohamad@protonmail.com" target="_blank">masri_mohamad@protonmail.com</a>
             </div>
           </Col>
           <Col size={12} sm={6} className="text-center text-sm-end" >
